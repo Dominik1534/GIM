@@ -1,0 +1,321 @@
+[Workspace loaded from C:/Users/DK/Desktop/MGR/APU/.RData]
+
+> #a)
+> #wartość a
+> a<-12/exp(12)
+> a
+[1] 7.373055e-05
+> #wartość b
+> b<-a*3
+> b
+[1] 0.0002211916
+> #b)
+> #wyszukanie dokumentacji funkcji sqrt()
+> help(sqrt)
+> # c)
+> # tworzenie wektora a z zakresu 80-90
+> c<- 80:90
+> c
+ [1] 80 81 82 83 84 85 86 87 88 89 90
+> #suma kwadratow liczb zawartych w wektorze
+> sum (c)
+[1] 935
+> #suma kwadratow liczb zawartych w wektorze
+> sum (c)
+[1] 935
+> apropos ("max")
+ [1] "cummax"       "max"          "max.col"      "mem.maxNSize" "mem.maxVSize" "pmax"         "pmax.int"     "promax"       "varimax"      "which.max"   
+> # E) 
+> # ścieżka katalogu roboczego 
+> setwd("C:/Users/DK/Desktop/MGR/APU")
+> getwd()
+[1] "C:/Users/DK/Desktop/MGR/APU"
+> # zmienna a zawierająca łańcuch znaków 
+> a<- "smartfon Motorola"
+> # zapis do pliku
+> write(a, file='Podpunkt_E.csv')
+> remove(a)
+> a
+BŁĄD: nie znaleziono obiektu 'a'
+> a<-read.csv(file='Podpunkt_E.csv', sep=',')
+> a
+[1] smartfon.Motorola
+<0 wierszy> (lub 'row.names' o zerowej długości)
+> # F)
+> # instalacja pakietu gridExtra
+> install.packages("gridExtra")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/DK/Documents/R/win-library/4.0’
+(as ‘lib’ is unspecified)
+próbowanie adresu URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/gridExtra_2.3.zip'
+Content type 'application/zip' length 1109088 bytes (1.1 MB)
+downloaded 1.1 MB
+
+package ‘gridExtra’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\DK\AppData\Local\Temp\RtmpAfhB1t\downloaded_packages
+> #załadowanie pakietu gridExtra
+> library(gridExtra)
+> #dokumentacja pakietu
+> library(help = grid)
+> help(package = "gridExtra")
+> # pierwsze 10 wierszy zbioru Titanic
+> grid.table(Titanic[1:10])
+> a<-seq(400,320, -8)
+> a
+ [1] 400 392 384 376 368 360 352 344 336 328 320
+> #H)
+> #wektor a z liczbami od 60 do 40
+> a<-60:40
+> a
+ [1] 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40
+> #wektor b z loiczbami od 40 do 50 
+> b<-40:50
+> b
+ [1] 40 41 42 43 44 45 46 47 48 49 50
+> #połaczenie wektorów b,a
+> d<-c(b,a)
+> d
+ [1] 40 41 42 43 44 45 46 47 48 49 50 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40
+> nazwa<-c("Motorola 1000", "Motorola 2000", "Motorola 3000", "Motorola 4000", "Motorola 5000", 
++          "Motorola 6000", "Motorola 7000", "Motorola 8000", "Motorola 9000", "Motorola 10000")
+> wyświetlacz<-c('IPS','IPS','IPS','IPS','IPS','IPS','OLED','OLED','OLED','OLED')
+> pamię_RAM<-c('2GB','2GB','4GB','4GB','6GB',
++            '8GB','8GB','10GB','16GB','32GB')
+> pamię_wbudowana<-c('16GB','32GB','64GB','64GB','128GB','256GB', '256GB', '256GB','512GB','512GB')
+> aparat_foto<- c('12Mpix','12Mpix','12Mpix','12Mpix','32Mpix','32Mpix','64Mpix','64Mpix','64Mpix','128Mpix')
+> cena<- c(1000,1500,1700,1800,2000,2200,2500,2700,2800,3200)
+> liczba_opinii<- c(80,90,50,40,30,40,40,10,20,35)
+> smartfony<-data.frame(nazwa,wyświetlacz, pamię_RAM, pamię_wbudowana, aparat_foto, cena, liczba_opinii)
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35
+> #średnia ceny 
+> mean(smartfony$cena)
+[1] 2140
+> smartfony_nowy<-data.frame(nazwa="Motorola 11000",wyświetlacz="OLED", pamię_RAM='32GB', pamię_wbudowana='512GB',
++                            aparat_foto='128Mpix', cena=3500, liczba_opinii=2)
+> smartfony_nowy
+           nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35
+11 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+> mean(smartfony$cena)
+[1] 2263.636
+> smartfony_nowy
+           nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35
+11 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+12 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+> mean(smartfony$cena)
+[1] 2366.667
+> #K)
+> #stworzenie nowej kolumny ocena_klienta
+> smartfony$ocena_klienta<-c('0','0,5','1','1,5','2','2,5','3','3,5','4','4,5','5')
+Błąd w poleceniu '`$<-.data.frame`(`*tmp*`, ocena_klienta, value = c("0", "0,5", ':
+  replacement has 11 rows, data has 12
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35
+11 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+12 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2
+> aggregate(smartfony$cena, list(smartfony$ocena_klienta),mean)
+Błąd w poleceniu 'aggregate.data.frame(as.data.frame(x), ...)':
+  argumenty muszą mieć tę samą długość
+> #K)
+> #stworzenie nowej kolumny ocena_klienta
+> smartfony$ocena_klienta<-c('0','0,5','1','1,5','2','2,5','3','3,5','4','4,5','5','4')
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii ocena_klienta
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80             0
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90           0,5
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50             1
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40           1,5
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30             2
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40           2,5
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40             3
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10           3,5
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20             4
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35           4,5
+11 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2             5
+12 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2             4
+> aggregate(smartfony$cena, list(smartfony$ocena_klienta),mean)
+   Group.1    x
+1        0 1000
+2      0,5 1500
+3        1 1700
+4      1,5 1800
+5        2 2000
+6      2,5 2200
+7        3 2500
+8      3,5 2700
+9        4 3150
+10     4,5 3200
+11       5 3500
+> #L)
+> #dodanie 4 smartfonów do ramki
+> smartfony_nowy<-data.frame(nazwa="Motorola 12000",wyświetlacz="OLED", pamię_RAM='32GB', pamię_wbudowana='512GB',
++                            aparat_foto='128Mpix', cena=3500, liczba_opinii=13,ocena_klienta = '4')
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony_nowy<-data.frame(nazwa="Motorola 13000",wyświetlacz="OLED", pamię_RAM='32GB', pamię_wbudowana='512GB',
++                            aparat_foto='128Mpix', cena=3600, liczba_opinii=24,ocena_klienta = '4')
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony_nowy<-data.frame(nazwa="Motorola 14000",wyświetlacz="OLED", pamię_RAM='64GB', pamię_wbudowana='512GB',
++                            aparat_foto='128Mpix', cena=3700, liczba_opinii=0,ocena_klienta = '5')
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony_nowy<-data.frame(nazwa="Motorola 15000",wyświetlacz="OLED", pamię_RAM='64GB', pamię_wbudowana='512GB',
++                            aparat_foto='128Mpix', cena=3800, liczba_opinii=0,ocena_klienta = '4')
+> smartfony <- rbind(smartfony, smartfony_nowy)
+> smartfony
+            nazwa wyświetlacz pamię_RAM pamię_wbudowana aparat_foto cena liczba_opinii ocena_klienta
+1   Motorola 1000         IPS       2GB            16GB      12Mpix 1000            80             0
+2   Motorola 2000         IPS       2GB            32GB      12Mpix 1500            90           0,5
+3   Motorola 3000         IPS       4GB            64GB      12Mpix 1700            50             1
+4   Motorola 4000         IPS       4GB            64GB      12Mpix 1800            40           1,5
+5   Motorola 5000         IPS       6GB           128GB      32Mpix 2000            30             2
+6   Motorola 6000         IPS       8GB           256GB      32Mpix 2200            40           2,5
+7   Motorola 7000        OLED       8GB           256GB      64Mpix 2500            40             3
+8   Motorola 8000        OLED      10GB           256GB      64Mpix 2700            10           3,5
+9   Motorola 9000        OLED      16GB           512GB      64Mpix 2800            20             4
+10 Motorola 10000        OLED      32GB           512GB     128Mpix 3200            35           4,5
+11 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2             5
+12 Motorola 11000        OLED      32GB           512GB     128Mpix 3500             2             4
+13 Motorola 12000        OLED      32GB           512GB     128Mpix 3500            13             4
+14 Motorola 13000        OLED      32GB           512GB     128Mpix 3600            24             4
+15 Motorola 14000        OLED      64GB           512GB     128Mpix 3700             0             5
+16 Motorola 15000        OLED      64GB           512GB     128Mpix 3800             0             4
+> install.packages("plotrix")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/DK/Documents/R/win-library/4.0’
+(as ‘lib’ is unspecified)
+próbowanie adresu URL 'https://cran.rstudio.com/bin/windows/contrib/4.0/plotrix_3.8-1.zip'
+Content type 'application/zip' length 1138351 bytes (1.1 MB)
+downloaded 1.1 MB
+
+package ‘plotrix’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\DK\AppData\Local\Temp\RtmpAfhB1t\downloaded_packages
+> library(plotrix)
+> dane <- aggregate(smartfony$liczba_opinii, list(smartfony$ocena_klienta), sum)
+> barp(dane[,2], names.arg = dane[,1], main = 'Liczebność reprezentantów każdej z ocen klientów')
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> pie(percentage)
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> fan.plot(percentage, labels = names(percentage), main = "Procentowy udział oceny")
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> pie(percentage)
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> pie(percentage)
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> fan.plot(percentage, labels = names(percentage), main = "Procentowy udział oceny")
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> pie(percentage)
+> percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
+> fan.plot(percentage, labels = names(percentage), main = "Procentowy udział oceny")
+> #N)
+> #procentowy udział monitorów o konkretnym statusie opinii
+> n_column <- ifelse(smartfony$liczba_opinii>100,'wiecej 100 opinii',
++                    ifelse(smartfony$liczba_opinii>=50, '50-100 opinii', 
++                           ifelse(smartfony$liczba_opinii>0, 'mniej 50 opinii', 
++                                  'nie ma')))
+> smartfony['status_opinii'] <- factor(n_column)
+> percentage <-table(smartfony$status_opinii)/length(smartfony$status_opinii)
+> pie(percentage)
+> #O)
+> #utworzenie zdania 
+> for (i in 1:length(smartfony$nazwa)){
++   print(paste(smartfony$nazwa[i], 'ma ocenę klientów', smartfony$ocena_klienta[i], 
++               ',bo ma liczbę opinii', smartfony$liczba_opinii[i]))
++ }
+[1] "Motorola 1000 ma ocenę klientów 0 ,bo ma liczbę opinii 80"
+[1] "Motorola 2000 ma ocenę klientów 0,5 ,bo ma liczbę opinii 90"
+[1] "Motorola 3000 ma ocenę klientów 1 ,bo ma liczbę opinii 50"
+[1] "Motorola 4000 ma ocenę klientów 1,5 ,bo ma liczbę opinii 40"
+[1] "Motorola 5000 ma ocenę klientów 2 ,bo ma liczbę opinii 30"
+[1] "Motorola 6000 ma ocenę klientów 2,5 ,bo ma liczbę opinii 40"
+[1] "Motorola 7000 ma ocenę klientów 3 ,bo ma liczbę opinii 40"
+[1] "Motorola 8000 ma ocenę klientów 3,5 ,bo ma liczbę opinii 10"
+[1] "Motorola 9000 ma ocenę klientów 4 ,bo ma liczbę opinii 20"
+[1] "Motorola 10000 ma ocenę klientów 4,5 ,bo ma liczbę opinii 35"
+[1] "Motorola 11000 ma ocenę klientów 5 ,bo ma liczbę opinii 2"
+[1] "Motorola 11000 ma ocenę klientów 4 ,bo ma liczbę opinii 2"
+[1] "Motorola 12000 ma ocenę klientów 4 ,bo ma liczbę opinii 13"
+[1] "Motorola 13000 ma ocenę klientów 4 ,bo ma liczbę opinii 24"
+[1] "Motorola 14000 ma ocenę klientów 5 ,bo ma liczbę opinii 0"
+[1] "Motorola 15000 ma ocenę klientów 4 ,bo ma liczbę opinii 0"
+> write.csv(smartfony, 'smartfony.csv')
+> dane <- read.csv('smartfony.csv')
+> #O)
+> #utworzenie zdania 
+> for (i in 1:length(smartfony$nazwa)){
++   print(paste(smartfony$nazwa[i], 'ma ocenę klientów', smartfony$ocena_klienta[i], 
++               ',bo ma liczbę opinii', smartfony$liczba_opinii[i]))
++ }
+[1] "Motorola 1000 ma ocenę klientów 0 ,bo ma liczbę opinii 80"
+[1] "Motorola 2000 ma ocenę klientów 0,5 ,bo ma liczbę opinii 90"
+[1] "Motorola 3000 ma ocenę klientów 1 ,bo ma liczbę opinii 50"
+[1] "Motorola 4000 ma ocenę klientów 1,5 ,bo ma liczbę opinii 40"
+[1] "Motorola 5000 ma ocenę klientów 2 ,bo ma liczbę opinii 30"
+[1] "Motorola 6000 ma ocenę klientów 2,5 ,bo ma liczbę opinii 40"
+[1] "Motorola 7000 ma ocenę klientów 3 ,bo ma liczbę opinii 40"
+[1] "Motorola 8000 ma ocenę klientów 3,5 ,bo ma liczbę opinii 10"
+[1] "Motorola 9000 ma ocenę klientów 4 ,bo ma liczbę opinii 20"
+[1] "Motorola 10000 ma ocenę klientów 4,5 ,bo ma liczbę opinii 35"
+[1] "Motorola 11000 ma ocenę klientów 5 ,bo ma liczbę opinii 2"
+[1] "Motorola 11000 ma ocenę klientów 4 ,bo ma liczbę opinii 2"
+[1] "Motorola 12000 ma ocenę klientów 4 ,bo ma liczbę opinii 13"
+[1] "Motorola 13000 ma ocenę klientów 4 ,bo ma liczbę opinii 24"
+[1] "Motorola 14000 ma ocenę klientów 5 ,bo ma liczbę opinii 0"
+[1] "Motorola 15000 ma ocenę klientów 4 ,bo ma liczbę opinii 0"
+> write.csv(smartfony, 'smartfony.csv')
+> dane <- read.csv('smartfony.csv')
