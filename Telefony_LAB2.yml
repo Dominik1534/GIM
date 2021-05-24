@@ -1,0 +1,214 @@
+Version: 2.0
+#########################
+# Alternatives Section
+# THIS IS FOR The Tom, Dick, & Harry problem at
+# https://en.wikipedia.org/wiki/Analytic_hierarchy_process_%E2%80%93_leader_example
+#
+# This example is provided by Nicole Radziwill, see
+# http://qualityandinnovation.com/2016/01/04/analytic-hierarchy-process-ahp-with-the-ahp-package/
+#
+Alternatives: &alternatives
+# 1= not well; 10 = best possible
+# Your assessment based on the paragraph descriptions may be different.
+  Apple iPhone 12mini 64:
+     Cena: 2999
+     wyswietlacz: 5.4
+     RAM: 4 
+     pamiec wbudowana: 64
+     aparat foto: 12 
+     komunikacja: WiFi ,5G ,LTE ,NFC ,Bluetooth
+  Apple iPhone 12mini 128:
+     Cena: 3699
+     wyswietlacz: 5.4
+     RAM: 4 
+     pamiec wbudowana: 128
+     aparat foto: 12 
+     komunikacja: WiFi ,5G ,LTE ,NFC ,Bluetooth
+  Apple iPhone 12mini 256:
+     Cena: 4239
+     wyswietlacz: 5.4
+     RAM: 4 
+     pamiec wbudowana: 256
+     aparat foto: 12 
+     komunikacja: WiFi ,5G ,LTE ,NFC ,Bluetooth
+  Apple iPhone 11:
+     Cena: 2999
+     wyswietlacz: 4.7
+     RAM: 4 
+     pamiec wbudowana: 64
+     aparat foto: 12 
+     komunikacja: WiFi ,LTE ,NFC ,Bluetooth
+  Apple iPhone SE:
+     Cena: 1949
+     wyswietlacz: 6.1
+     RAM: 3 
+     pamiec wbudowana: 64
+     aparat foto: 12 
+     komunikacja: WiFi ,LTE ,NFC ,Bluetooth
+  Apple iPhone 12:
+     Cena: 3999
+     wyswietlacz: 6.1
+     RAM: 6 
+     pamiec wbudowana: 64
+     aparat foto: 12 
+     komunikacja: WiFi,5G, LTE ,NFC ,Bluetooth
+  Apple iPhone 12 Pro:
+     Cena: 5099
+     wyswietlacz: 6.1
+     RAM: 6 
+     pamiec wbudowana: 128
+     aparat foto: 12 
+     komunikacja: WiFi,5G, LTE ,NFC ,Bluetooth
+  Apple iPhone 12 ProMax 512:
+     Cena: 7199
+     wyswietlacz: 6.7
+     RAM: 6 
+     pamiec wbudowana: 512
+     aparat foto: 12 
+     komunikacja: WiFi,5G, LTE ,NFC ,Bluetooth
+  Apple iPhone 12 ProMax 128:
+     Cena: 5499
+     wyswietlacz: 6.7
+     RAM: 6 
+     pamiec wbudowana: 128
+     aparat foto: 12 
+     komunikacja: WiFi,5G, LTE ,NFC ,Bluetooth
+  Apple iPhone 12 ProMax 256:
+     Cena: 6199
+     wyswietlacz: 6.7
+     RAM: 6 
+     pamiec wbudowana: 256
+     aparat foto: 12 
+     komunikacja: WiFi,5G, LTE ,NFC ,Bluetooth
+#
+# End of Alternatives Section
+#####################################
+# Goal Section
+#
+Goal:
+
+  name: Najlepszy telefon
+  preferences:
+    pairwise:
+      # preferences are defined pairwise
+      # 1 means: A is equal to B
+      # 9 means: A is highly preferrable to B
+      # 1/9 means: B is highly preferrable to A
+     - [Koszt, Styl, 7]
+     - [Koszt, Jakosc, 7]
+     - [Koszt, Wydajnosc, 1]
+     - [Wydajnosc, Styl, 9]
+     - [Wydajnosc, Jakosc, 4]
+     - [Jakosc, Styl, 6]
+  children: 
+    Koszt:
+      preferences:
+        pairwiseFunction:
+          function(a1, a2) min(9, max(1/9, a1$Cena/a2$Cena)) 
+      children: *alternatives 
+    Wydajnosc:
+      preferences:
+        pairwiseFunction:
+          function(a1, a2) max(9, min(1/9, a1$Ram/a2$Ram)) 
+      children: *alternatives 
+    Jakosc:
+      preferences:
+        pairwise:
+                - [Apple iPhone SE, Apple iPhone 11, 1/2]
+                - [Apple iPhone SE, Apple iPhone 12mini 64, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12mini 128, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12mini 256, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12 Pro, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 128, 1/8]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 256, 1/8]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 512, 1/8]
+                - [Apple iPhone 11, Apple iPhone 12mini 64, 1]
+                - [Apple iPhone 11, Apple iPhone 12mini 128, 1]
+                - [Apple iPhone 11, Apple iPhone 12mini 256, 1]
+                - [Apple iPhone 11, Apple iPhone 12, 1/3]
+                - [Apple iPhone 11, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12mini 64, Apple iPhone 12mini 128, 1]
+                - [Apple iPhone 12mini 64, Apple iPhone 12mini 256, 1]
+                - [Apple iPhone 12mini 64, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12mini 256, 1]
+                - [Apple iPhone 12mini 128, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12, Apple iPhone 12 Pro, 1/2]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 128, 1/3]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 256, 1/3]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 512, 1/3]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 128, 1/2]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 256, 1/2]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 512, 1/2]
+                - [Apple iPhone 12 ProMax 128, Apple iPhone 12 ProMax 256, 1]
+                - [Apple iPhone 12 ProMax 128, Apple iPhone 12 ProMax 512, 1]
+                - [Apple iPhone 12 ProMax 256, Apple iPhone 12 ProMax 512, 1]
+      children: *alternatives
+    Styl:
+      preferences:
+        pairwise:
+                - [Apple iPhone SE,Apple iPhone 11, 1/2]
+                - [Apple iPhone SE, Apple iPhone 12mini 64, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12mini 128, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12mini 256, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12 Pro, 1/7]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 128, 1/8]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 256, 1/8]
+                - [Apple iPhone SE, Apple iPhone 12 ProMax 512, 1/8]
+                - [Apple iPhone 11, Apple iPhone 12mini 64, 3]
+                - [Apple iPhone 11, Apple iPhone 12mini 128, 3]
+                - [Apple iPhone 11, Apple iPhone 12mini 256, 3]
+                - [Apple iPhone 11, Apple iPhone 12, 1/2]
+                - [Apple iPhone 11, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 128, 1/4]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 256, 1/4]
+                - [Apple iPhone 11, Apple iPhone 12 ProMax 512, 1/4]
+                - [Apple iPhone 12mini 64, Apple iPhone 12mini 128, 1]
+                - [Apple iPhone 12mini 64, Apple iPhone 12mini 256, 1]
+                - [Apple iPhone 12mini 64, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 64, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12mini 256, 1]
+                - [Apple iPhone 12mini 128, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 128, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12, 1/3]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 Pro, 1/4]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 128, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 256, 1/5]
+                - [Apple iPhone 12mini 256, Apple iPhone 12 ProMax 512, 1/5]
+                - [Apple iPhone 12, Apple iPhone 12 Pro, 1/2]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 128, 1/3]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 256, 1/3]
+                - [Apple iPhone 12, Apple iPhone 12 ProMax 512, 1/3]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 128, 1/2]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 256, 1/2]
+                - [Apple iPhone 12 Pro, Apple iPhone 12 ProMax 512, 1/2]
+                - [Apple iPhone 12 ProMax 128, Apple iPhone 12 ProMax 256, 1]
+                - [Apple iPhone 12 ProMax 128, Apple iPhone 12 ProMax 512, 1]
+                - [Apple iPhone 12 ProMax 256, Apple iPhone 12 ProMax 512, 1]
+      children: *alternatives
+#
+# End of Goal Section
+#####################################
