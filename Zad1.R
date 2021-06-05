@@ -1,11 +1,11 @@
 #a)
-#wartoœæ a
+#warto?? a
 a<-12/exp(12)
 a
-#wartoœæ b
+#warto?? b
 b<-a*3
 b
-#sprawdzenie co jest wiêksze
+#sprawdzenie co jest wi?ksze
 max(a,b)
 #b)
 #wyszukanie dokumentacji funkcji sqrt()
@@ -18,28 +18,28 @@ c
 sum (c)
 
 #D)
-#Wszystkie funkcje zawieraj¹ce max w swojej nazwie
+#Wszystkie funkcje zawieraj?ce max w swojej nazwie
 
 apropos ("max")
 
 # E) 
-# œcie¿ka katalogu roboczego 
+# ?cie?ka katalogu roboczego 
 setwd("C:/Users/DK/Desktop/MGR/APU")
 getwd()
 
-# zmienna a zawieraj¹ca ³añcuch znaków 
+# zmienna a zawieraj?ca ?a?cuch znak?w 
 a<- "smartfon Motorola"
 
 # zapis do pliku
 write(a, file='Podpunkt_E.csv')
 
-# usuniêcie zmiennej a oraz sprawdzenie poprawnoœci dzia³ania
+# usuni?cie zmiennej a oraz sprawdzenie poprawno?ci dzia?ania
 
 remove(a)
 
 a
 
-# wczytanie pliku ze zmienn¹ a i sprawdzenie jej wartoœci 
+# wczytanie pliku ze zmienn? a i sprawdzenie jej warto?ci 
 
 a<-read.csv(file='Podpunkt_E.csv', sep=',')
 a
@@ -48,7 +48,7 @@ a
 # instalacja pakietu gridExtra
 install.packages("gridExtra")
 
-#za³adowanie pakietu gridExtra
+#za?adowanie pakietu gridExtra
 library(gridExtra)
 
 #dokumentacja pakietu
@@ -59,7 +59,7 @@ help(package = "gridExtra")
 grid.table(Titanic[1:10])
 
 # G)
-#wektor zawieraj¹cy ci¹g liczb
+#wektor zawieraj?cy ci?g liczb
 
 a<-seq(400,320, -8)
 a
@@ -72,45 +72,45 @@ a
 b<-40:50
 b
 
-#po³aczenie wektorów b,a
+#po?aczenie wektor?w b,a
 d<-c(b,a)
 d
 
 #I)
 
-#wektor nazwa z z nazwami 10 smartfonów Motorola 
+#wektor nazwa z z nazwami 10 smartfon?w Motorola 
 
-nazwa<-c("Motorola 1000", "Motorola 2000", "Motorola 3000", "Motorola 4000", "Motorola 5000", 
-         "Motorola 6000", "Motorola 7000", "Motorola 8000", "Motorola 9000", "Motorola 10000")
+nazwa<-c("Motorola Moto E7 Plus ", "Motorola Moto g9 play", "Motorola Moto E6s", "Motorola Moto g9 power", "Motorola Moto G Pro ", 
+         "Motorola Moto g100", "Motorola Moto g9 plus", "Motorola Moto G8 Power 4", "Motorola Moto E7i Power", "Motorola EDGE")
 
 
-wyœwietlacz<-c('IPS','IPS','IPS','IPS','IPS','IPS','OLED','OLED','OLED','OLED')
+wyswietlacz<-c('HD+','Max Vision HD+','IPS','IPS','IPS','Full HD+','IPS','OLED','Max Vision HD+','OLED')
 
-pamiê_RAM<-c('2GB','2GB','4GB','4GB','6GB',
-           '8GB','8GB','10GB','16GB','32GB')
+pamiecRAM<-c(4,4,2,4,4,
+           8,4,4,2,8)
 
-pamiê_wbudowana<-c('16GB','32GB','64GB','64GB','128GB','256GB', '256GB', '256GB','512GB','512GB')
+pamiecwbudowana<-c(64,64,32,128,128,128, 128, 64,32,128)
 
-aparat_foto<- c('12Mpix','12Mpix','12Mpix','12Mpix','32Mpix','32Mpix','64Mpix','64Mpix','64Mpix','128Mpix')
+aparat_foto<- c(48,48,12,64,48,64,64,16,13,64)
 
-cena<- c(1000,1500,1700,1800,2000,2200,2500,2700,2800,3200)
+cena<- c(499,699,399,749,1499,2499,899,599,449,2599)
 
-liczba_opinii<- c(80,90,50,40,30,40,40,10,20,35)
+liczba_opinii<- c(199,38,258,57,9,7,88,104,4,30)
 
 #ramka danych
 
-smartfony<-data.frame(nazwa,wyœwietlacz, pamiê_RAM, pamiê_wbudowana, aparat_foto, cena, liczba_opinii)
+smartfony<-data.frame(nazwa,wyswietlacz, pamiecRAM, pamiecwbudowana, aparat_foto, cena, liczba_opinii)
 smartfony
 
-#œrednia ceny 
+#?rednia ceny 
 mean(smartfony$cena)
 
 
 #J)
-#dodanie nowego wpisu i ponowne wyliczenie œredniej ceny
+#dodanie nowego wpisu i ponowne wyliczenie ?redniej ceny
 
-smartfony_nowy<-data.frame(nazwa="Motorola 11000",wyœwietlacz="OLED", pamiê_RAM='32GB', pamiê_wbudowana='512GB',
-                           aparat_foto='128Mpix', cena=3500, liczba_opinii=2)
+smartfony_nowy<-data.frame(nazwa="Motorola Moto G8",wyswietlacz="OLED", pamiecRAM=4, pamiecwbudowana=64,
+                           aparat_foto=16, cena=669, liczba_opinii=60)
 smartfony_nowy
 
 smartfony <- rbind(smartfony, smartfony_nowy)
@@ -120,28 +120,28 @@ mean(smartfony$cena)
 
 #K)
 #stworzenie nowej kolumny ocena_klienta
-smartfony$ocena_klienta<-c('0','0,5','1','1,5','2','2,5','3','3,5','4','4,5','5','4')
+smartfony$ocena_klienta<-c('5','5','5','5','4','5','5','5','4','5','5')
 
 smartfony
 
 aggregate(smartfony$cena, list(smartfony$ocena_klienta),mean)
 
 #L)
-#dodanie 4 smartfonów do ramki
-smartfony_nowy<-data.frame(nazwa="Motorola 12000",wyœwietlacz="OLED", pamiê_RAM='32GB', pamiê_wbudowana='512GB',
-                           aparat_foto='128Mpix', cena=3500, liczba_opinii=13,ocena_klienta = '4')
+#dodanie 4 smartfon?w do ramki
+smartfony_nowy<-data.frame(nazwa="Motorola Moto g5G plus 6",wyswietlacz="IPS", pamiecRAM=6, pamiecwbudowana=128,
+                           aparat_foto=48, cena=1899, liczba_opinii=55,ocena_klienta = '5')
 smartfony <- rbind(smartfony, smartfony_nowy)
 
-smartfony_nowy<-data.frame(nazwa="Motorola 13000",wyœwietlacz="OLED", pamiê_RAM='32GB', pamiê_wbudowana='512GB',
-                           aparat_foto='128Mpix', cena=3600, liczba_opinii=24,ocena_klienta = '4')
+smartfony_nowy<-data.frame(nazwa="Motorola One Zoom",wyswietlacz="OLED FHD+", pamiecRAM=4, pamiecwbudowana=128,
+                           aparat_foto=48, cena=1099, liczba_opinii=61,ocena_klienta = '4')
 smartfony <- rbind(smartfony, smartfony_nowy)
 
-smartfony_nowy<-data.frame(nazwa="Motorola 14000",wyœwietlacz="OLED", pamiê_RAM='64GB', pamiê_wbudowana='512GB',
-                           aparat_foto='128Mpix', cena=3700, liczba_opinii=0,ocena_klienta = '5')
+smartfony_nowy<-data.frame(nazwa="Motorola Moto g30",wyswietlacz="IPS", pamiecRAM=6, pamiecwbudowana=128,
+                           aparat_foto=64, cena=999, liczba_opinii=22,ocena_klienta = '5')
 smartfony <- rbind(smartfony, smartfony_nowy)
 
-smartfony_nowy<-data.frame(nazwa="Motorola 15000",wyœwietlacz="OLED", pamiê_RAM='64GB', pamiê_wbudowana='512GB',
-                           aparat_foto='128Mpix', cena=3800, liczba_opinii=0,ocena_klienta = '4')
+smartfony_nowy<-data.frame(nazwa="Motorola Moto g9 plus 4",wyswietlacz="IPS", pamiecRAM=4, pamiecwbudowana=128,
+                           aparat_foto=64, cena=899, liczba_opinii=34,ocena_klienta = '4')
 smartfony <- rbind(smartfony, smartfony_nowy)
 
 smartfony
@@ -152,19 +152,20 @@ library(plotrix)
 
 dane <- aggregate(smartfony$liczba_opinii, list(smartfony$ocena_klienta), sum)
 
-barp(dane[,2], names.arg = dane[,1], main = 'Liczebnoœæ reprezentantów ka¿dej z ocen klientów')
+barp(dane[,2], names.arg = dane[,1], main = 'Liczebnosc reprezentantacji w kazdej z ocen klientow')
 
-#M)Procentowy udzia³ ka¿dej oceny
+#M)Procentowy udzia? ka?dej oceny
 
 percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
 pie(percentage)
 
 
 percentage <- table(smartfony$ocena)/length(smartfony$ocena_klienta)
-fan.plot(percentage, labels = names(percentage), main = "Procentowy udzia³ oceny")
+
+fan.plot(percentage, labels = names(percentage), main = "Procentowy udzial oceny")
 
 #N)
-#procentowy udzia³ monitorów o konkretnym statusie opinii
+#procentowy udzia? monitor?w o konkretnym statusie opinii
 n_column <- ifelse(smartfony$liczba_opinii>100,'wiecej 100 opinii',
                    ifelse(smartfony$liczba_opinii>=50, '50-100 opinii', 
                           ifelse(smartfony$liczba_opinii>0, 'mniej 50 opinii', 
@@ -179,12 +180,12 @@ pie(percentage)
 #O)
 #utworzenie zdania 
 for (i in 1:length(smartfony$nazwa)){
-  print(paste(smartfony$nazwa[i], 'ma ocenê klientów', smartfony$ocena_klienta[i], 
-              ',bo ma liczbê opinii', smartfony$liczba_opinii[i]))
+  print(paste(smartfony$nazwa[i], 'ma oceny klientow', smartfony$ocena_klienta[i], 
+              ',bo ma liczbe opinii', smartfony$liczba_opinii[i]))
 }
 
 #P)
-#ramka danych w pliku .csv.³adowanie ramki danych z pliku .csv
+#ramka danych w pliku .csv.?adowanie ramki danych z pliku .csv
 
 write.csv(smartfony, 'smartfony.csv')
 dane <- read.csv('smartfony.csv')
