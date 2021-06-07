@@ -1,0 +1,174 @@
+> library(C50)
+> library(mlr)
+> library(MASS)
+> library(randomForestSRC)
+> library(kernlab)
+> library(cmaes)
+> library(ranger)
+> ##Zadanie 1
+> Melanoma$status<-as.factor(Melanoma$status)
+> built_tree<-C5.0(status~.,data=Melanoma)
+> summary(built_tree)
+
+Call:
+C5.0.formula(formula = status ~ ., data = Melanoma)
+
+
+C5.0 [Release 2.07 GPL Edition]  	Mon Jun 07 18:54:14 2021
+-------------------------------
+
+Class specified by attribute `outcome'
+
+Read 205 cases (7 attributes) from undefined.data
+
+Decision tree:
+
+time <= 1435:
+:...time <= 99: 3 (4/1)
+:   time > 99: 1 (41/5)
+time > 1435:
+:...year <= 1970:
+    :...time <= 2493: 1 (13/3)
+    :   time > 2493: 2 (64/7)
+    year > 1970:
+    :...time > 1690: 2 (60/2)
+        time <= 1690:
+        :...year <= 1972: 1 (4)
+            year > 1972: 2 (19/1)
+
+
+Evaluation on training data (205 cases):
+
+	    Decision Tree   
+	  ----------------  
+	  Size      Errors  
+
+	     7   19( 9.3%)   <<
+
+
+	   (a)   (b)   (c)    <-classified as
+	  ----  ----  ----
+	    50     7          (a): class 1
+	         133     1    (b): class 2
+	     8     3     3    (c): class 3
+
+
+	Attribute usage:
+
+	100.00%	time
+	 78.05%	year
+
+
+Time: 0.0 secs
+
+> plot(built_tree)
+> #ramka danych
+> smartfony <- read.csv('smartfony.csv')
+> summary(smartfony)
+       X           nazwa           wyswietlacz          pamiecRAM     pamiecwbudowana   aparat_foto        cena      liczba_opinii   ocena_klienta  
+ Min.   : 1.0   Length:15          Length:15          Min.   :2.000   Min.   : 32.00   Min.   :12.0   Min.   : 399   Min.   :  4.0   Min.   :4.000  
+ 1st Qu.: 4.5   Class :character   Class :character   1st Qu.:4.000   1st Qu.: 64.00   1st Qu.:32.0   1st Qu.: 634   1st Qu.: 26.0   1st Qu.:4.500  
+ Median : 8.0   Mode  :character   Mode  :character   Median :4.000   Median :128.00   Median :48.0   Median : 899   Median : 55.0   Median :5.000  
+ Mean   : 8.0                                         Mean   :4.533   Mean   : 98.13   Mean   :45.4   Mean   :1097   Mean   : 68.4   Mean   :4.733  
+ 3rd Qu.:11.5                                         3rd Qu.:5.000   3rd Qu.:128.00   3rd Qu.:64.0   3rd Qu.:1299   3rd Qu.: 74.5   3rd Qu.:5.000  
+ Max.   :15.0                                         Max.   :8.000   Max.   :128.00   Max.   :64.0   Max.   :2599   Max.   :258.0   Max.   :5.000  
+ status_opinii     
+ Length:15         
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+> #!!!!!!!!!!!!!!!!!! MINIMAX ML !!!!!!!!!!!!!!!!!
+> data = smartfony[4:9]
+> ## Define the task
+> regr.task = makeRegrTask(id = "Surviral_prediction", data = data, target = "ocena_klienta")
+> # tuning parameters
+> set.seed(1234)
+> ps_ksvm = makeParamSet(
++   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x)
++ )
+> ps_rf = makeParamSet(
++   makeIntegerParam("num.trees", lower = 1L, upper = 200L)
++ )
+> # Choose a resampling strategy
+> rdesc = makeResampleDesc("CV", iters = 3L)
+> # Choose a performance measure
+> #meas = rmse
+> #meas = timepredict
+> #meas = list(ber, acc)
+> #meas = list(rmse, timepredict)
+> meas = list(rmse, timetrain)
+> # Choose a tuning method
+> ctrl = makeTuneControlCMAES(budget = 100L)
+> # Make tuning wrappers
+> tuned.ksvm = makeTuneWrapper(learner = "regr.ksvm", resampling = rdesc, par.set = ps_ksvm, control = ctrl, show.info = FALSE)
+> tuned.rf = makeTuneWrapper(learner = "regr.ranger", resampling = rdesc, par.set = ps_rf, control = ctrl, show.info = FALSE)
+> # Three learners to be compared
+> lrns = list(makeLearner("regr.lm"), tuned.ksvm, tuned.rf)
+> # Conduct the benchmark experiment
+> #bmr = benchmark(learners = lrns, tasks = regr.task, resamplings = rdesc, measures = rmse, 
+> #                show.info = FALSE)
+> bmr = benchmark(learners = lrns, tasks = regr.task, resamplings = rdesc, measures = meas, show.info = TRUE)
+Task: Surviral_prediction, Learner: regr.lm
+Resampling: cross-validation
+Measures:             rmse        timetrain   
+[Resample] iter 1:    0.3230733   0.0100000   
+[Resample] iter 2:    0.4212874   0.0000000   
+[Resample] iter 3:    0.8641531   0.0000000   
+
+
+Aggregated Result: rmse.test.rmse=0.5855538,timetrain.test.mean=0.0033333
+
+
+Task: Surviral_prediction, Learner: regr.ksvm.tuned
+Resampling: cross-validation
+Measures:             rmse        timetrain   
+[Resample] iter 1:    0.5692099   2.1100000   
+[Resample] iter 2:    0.3959050   2.0300000   
+[Resample] iter 3:    0.5600882   2.0700000   
+
+
+Aggregated Result: rmse.test.rmse=0.5146000,timetrain.test.mean=2.0700000
+
+
+Task: Surviral_prediction, Learner: regr.ranger.tuned
+Resampling: cross-validation
+Measures:             rmse        timetrain   
+[Resample] iter 1:    0.5273205   2.3200000   
+[Resample] iter 2:    0.4159155   2.6000000   
+[Resample] iter 3:    0.4472136   2.6100000   
+
+
+Aggregated Result: rmse.test.rmse=0.4658514,timetrain.test.mean=2.5100000
+
+
+> getBMRAggrPerformances(bmr)
+$Surviral_prediction
+$Surviral_prediction$regr.lm
+     rmse.test.rmse timetrain.test.mean 
+        0.585553844         0.003333333 
+
+$Surviral_prediction$regr.ksvm.tuned
+     rmse.test.rmse timetrain.test.mean 
+             0.5146              2.0700 
+
+$Surviral_prediction$regr.ranger.tuned
+     rmse.test.rmse timetrain.test.mean 
+          0.4658514           2.5100000 
+
+
+> plotBMRBoxplots(bmr,style="box") + theme_bw(base_size = 16)
+> ## 
+> plotBMRBoxplots(bmr, rmse, style = "box") + theme_bw(base_size = 16)
+> plotBMRBoxplots(bmr, timetrain, style = "box") + theme_bw(base_size = 16)
+> plotBMRBoxplots(bmr, rmse, style = "violin") + theme_bw(base_size = 16)
+Komunikaty ostrzegawcze:
+1: `fun.y` is deprecated. Use `fun` instead. 
+2: `fun.ymin` is deprecated. Use `fun.min` instead. 
+3: `fun.ymax` is deprecated. Use `fun.max` instead. 
+> plotBMRBoxplots(bmr, timetrain, style = "violin") + theme_bw(base_size = 16)
+Komunikaty ostrzegawcze:
+1: `fun.y` is deprecated. Use `fun` instead. 
+2: `fun.ymin` is deprecated. Use `fun.min` instead. 
+3: `fun.ymax` is deprecated. Use `fun.max` instead. 
