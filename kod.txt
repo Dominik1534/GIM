@@ -1,0 +1,74 @@
+> install.packages("C50")
+Error in install.packages : Updating loaded packages
+> install.packages("C50")
+Warning in install.packages :
+  package ‘C50’ is in use and will not be installed
+> library(C50)
+> Nazwa<-(c('Apple iPhone 11 ','Apple iPhone 11 ','Apple iPhone 11 ','Apple iPhone 12 mini ','Apple iPhone 12 mini','Apple iPhone 12 mini'
++           ,'Apple iPhone 12','Apple iPhone 12','Apple iPhone 12','Apple iPhone 12 Pro','Apple iPhone 12 Pro','Apple iPhone 12 Pro'))
+> Wyswietlacz<-c(6.1,6.1,6.1,5.4,5.4,5.4,6.1,6.1,6.1,6.1,6.1,6.1)
+> PamiecRam<-c(4,4,4,4,4,4,4,4,4,6,6,6)
+> PamiecWbudowana<-c(64,128,256,64,128,256,64,128,256,128,256,512)
+> Cena<-c(3199,3599,3899,2999,3399,3949,3999,4449,4599,5099,5469,6699)
+> AparatFoto<-c(36,36,36,36,36,36,36,36,36,48,48,48)
+> Komunikacja<-c(' WiFi 5G LTE NFC Bluetooth v4.0',' WiFi 5G LTE NFC Bluetooth v4.0',' WiFi 5G LTE NFC Bluetooth v4.0',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth'
++                ,' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth',' WiFi 5G LTE NFC Bluetooth')
+> Opinia<-factor(c(5,5,4,5,5,4,5,5,4,5,5,5))
+> smartfony<-data.frame(Nazwa,Wyswietlacz, PamiecRam, PamiecWbudowana, Cena,AparatFoto,Komunikacja,Opinia)
+> summary(smartfony)
+    Nazwa            Wyswietlacz      PamiecRam   PamiecWbudowana      Cena        AparatFoto Komunikacja        Opinia
+ Length:12          Min.   :5.400   Min.   :4.0   Min.   : 64.0   Min.   :2999   Min.   :36   Length:12          4:3   
+ Class :character   1st Qu.:5.925   1st Qu.:4.0   1st Qu.:112.0   1st Qu.:3549   1st Qu.:36   Class :character   5:9   
+ Mode  :character   Median :6.100   Median :4.0   Median :128.0   Median :3974   Median :36   Mode  :character         
+                    Mean   :5.925   Mean   :4.5   Mean   :186.7   Mean   :4280   Mean   :39                            
+                    3rd Qu.:6.100   3rd Qu.:4.5   3rd Qu.:256.0   3rd Qu.:4724   3rd Qu.:39                            
+                    Max.   :6.100   Max.   :6.0   Max.   :512.0   Max.   :6699   Max.   :48                            
+> built_tree<-C5.0(Opinia~.,data=smartfony)
+> summary(built_tree)
+
+Call:
+C5.0.formula(formula = Opinia ~ ., data = smartfony)
+
+
+C5.0 [Release 2.07 GPL Edition]  	Mon Jun 07 14:09:38 2021
+-------------------------------
+
+Class specified by attribute `outcome'
+
+Read 12 cases (8 attributes) from undefined.data
+
+Decision tree:
+
+PamiecWbudowana <= 128: 5 (7)
+PamiecWbudowana > 128:
+:...PamiecRam <= 4: 4 (3)
+    PamiecRam > 4: 5 (2)
+
+
+Evaluation on training data (12 cases):
+
+	    Decision Tree   
+	  ----------------  
+	  Size      Errors  
+
+	     3    0( 0.0%)   <<
+
+
+	   (a)   (b)    <-classified as
+	  ----  ----
+	     3          (a): class 4
+	           9    (b): class 5
+
+
+	Attribute usage:
+
+	100.00%	PamiecWbudowana
+	 41.67%	PamiecRam
+
+
+Time: 0.0 secs
+
+> plot(built_tree)
+> predict(built_tree,newdata = smartfony,type = 'class')
+ [1] 5 5 4 5 5 4 5 5 4 5 5 5
+Levels: 4 5
